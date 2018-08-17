@@ -16,6 +16,12 @@ $helper 	= $dice->create('\App\Helper\Helper');
 * Router
 */
 
+Router::route('/phone_checker/public/', function() use($controller){
+
+	$controller -> homePage();
+
+});
+
 Router::route('/', function() use($controller){
 
 	$controller -> homePage();
@@ -32,7 +38,7 @@ Router::route('/([0-9]+)/([^/]+)', function($id, $article_name) use($controller)
 
 
 if (false === Router::execute($url)) 
-	echo '404';
+	echo '404c';
 
 
 if (ENV == 'dev')

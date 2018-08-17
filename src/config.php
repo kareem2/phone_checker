@@ -15,7 +15,7 @@ define('DB_HOST', 'localhost');
 define('TWIG_VIEWS_FOLDER', __DIR__.'/views');
 define('TWIG_CACHE_FOLDER', __DIR__.'/../cache');
 define('TWIG_AUTO_RELOAD', true); // disable cache
-define('TWIG_AUTOESCAPE', true);
+define('TWIG_AUTOESCAPE', false);
 
 define('CATEGORY_ITEMS_PER_PAGE', 10);
 
@@ -32,7 +32,7 @@ if (PHP_SAPI == 'cli-server') {
 }
 
 global $url;
-//$url = (isset($_GET['___url'])?$_GET['___url']:$_SERVER['REQUEST_URI']);
-//$url = filter_var($url, FILTER_SANITIZE_URL);
+$url = (isset($_GET['___url'])?$_GET['___url']:$_SERVER['REQUEST_URI']);
+$url = filter_var($url, FILTER_SANITIZE_URL);
 
-//$route =  array_filter(explode('/', filter_var($url, FILTER_SANITIZE_URL)));
+$route =  array_filter(explode('/', filter_var($url, FILTER_SANITIZE_URL)));

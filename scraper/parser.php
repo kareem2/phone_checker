@@ -53,7 +53,8 @@ foreach ($states as $state) {
 	echo "State: $state, ID: $state_id, Country: {$state_details['country']}, Prefix $c of $total \n";
 	foreach ($prefixes['rows'] as $prefix) {
 		$c++;
-		if (preg_match('%/([0-9]+)-([0-9]+)%six', $prefixes['rows'][0]['prefix'], $regs)) {
+		//r($prefixes['rows'][0]['prefix']);
+		if (preg_match('%/([0-9]+)-([0-9]+)%six', $prefix['prefix'], $regs)) {
 			$code = $regs[2];
 		} else {
 			continue;
@@ -70,10 +71,10 @@ foreach ($states as $state) {
 
 		]);
 
-		
-
+//if($c == 3)		
+//die();
 		
 	}
-
+//die();
 }
 die();

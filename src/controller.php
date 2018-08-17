@@ -17,14 +17,12 @@ class Controller
 		$this -> db = $db; 
 		$this -> app = $app;
 		$this -> twig = $app -> loadTwig();
-
 	}
 
 	public function homePage()
 	{		 
 
-		$content = $this -> db -> homePage();
-
+		$content = '345';
 		$this->twig->display('home.html.twig', array("content" => $content));
 		
 		return;
