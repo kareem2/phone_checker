@@ -71,8 +71,10 @@ Router::route('([0-9]{3})-([0-9]{3})', function($area_code, $prefix) use($contro
 
 
 
-if (false === Router::execute($url)) 
+if (false === Router::execute($url)) {
+	var_dump($url);
 	echo '404c';
+}
 
 
 if (ENV == 'dev')
