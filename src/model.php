@@ -101,7 +101,8 @@ class Model
 
 		$stmt = $this->db->prepare($sql_query);
 
-		foreach ($where as $key => $value) {
+		foreach ($where as $key => &$value) {
+
 			$stmt->bindParam(':'.$key, $value);
 		}
 

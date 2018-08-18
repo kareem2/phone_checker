@@ -53,7 +53,7 @@ class __TwigTemplate_576dedb95077c1fd1779d81b6b241c6624d1ff9303174bb7f5e2d535133
          Look up and report a phone number, if you have received unwanted calls. Here we offer a free reverse phone number lookup service. Please rate the number and leave your comment about the call, helping the community to watch out for those numbers.
       </div>
       <div>
-         <form name=\"searchForm\" id=\"searchForm\" method=\"get\" action=\"./search.php\">
+         <form name=\"searchForm\" id=\"searchForm\" method=\"post\" action=\"/phone_checker/public/\">
             <div class=\"input-group\">
                <input id=\"btn-input\" name=\"number\" type=\"text\" class=\"form-control input-lg\" placeholder=\"Enter a phone number (e.g. 202-365-09XX)\" required=\"\">
                <span class=\"input-group-btn\">
