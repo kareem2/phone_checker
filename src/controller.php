@@ -17,6 +17,8 @@ class Controller
 		$this -> db = $db; 
 		$this -> app = $app;
 		$this -> twig = $app -> loadTwig();
+
+		$this->twig->addGlobal('app_url', APP_URL);
 	}
 
 	public function homePage()

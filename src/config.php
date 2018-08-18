@@ -12,6 +12,9 @@ define('DB_CHARSET','utf8');
 define('DB_PORT', 3306); 
 define('DB_HOST', 'localhost'); 
 
+
+define('APP_URL', 'http://localhost/phone_checker/public/'); 
+
 define('TWIG_VIEWS_FOLDER', __DIR__.'/views');
 define('TWIG_CACHE_FOLDER', __DIR__.'/../cache');
 define('TWIG_AUTO_RELOAD', true); // disable cache
