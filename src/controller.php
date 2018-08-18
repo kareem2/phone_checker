@@ -22,8 +22,8 @@ class Controller
 	public function homePage()
 	{		 
 
-		$content = '345';
-		$this->twig->display('home.html.twig', array("content" => $content));
+		$content = '<h1>ertert</h1>';
+		$this->twig->display('main.html.twig', array("content" => $content));
 		
 		return;
 	}
