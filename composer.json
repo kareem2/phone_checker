@@ -4,7 +4,6 @@
 	"require" :
 	{
 		"php": ">=5.3",
-		"0000dev/my" : "*",
 		"twig/twig": "^2.4",
 		"symfony/dom-crawler": "^3.4",
 		"symfony/css-selector": "^3.4"
