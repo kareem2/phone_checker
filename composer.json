@@ -7,10 +7,6 @@
 		"twig/twig": "^2.4",
 		"symfony/dom-crawler": "^3.4",
 		"symfony/css-selector": "^3.4"
-	},
-	"autoload": {
-		"files": ["src/config.php"],
-        "classmap": ["src/helper.php", "src/model.php", "src/controller.php", "vendor/rawInclude/dice.php", "vendor/rawInclude/router.php"]
-    }
+	}
 }
  
