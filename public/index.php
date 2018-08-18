@@ -70,6 +70,11 @@ Router::route('([0-9]{3})-([0-9]{3})', function($area_code, $prefix) use($contro
 });
 
 
+Router::route('add_comment', function() use($controller){
+	var_dump('add comment');
+	die();
+	$controller -> itemPage($id, $article_name);
+});
 
 if (false === Router::execute($url)) {
 	var_dump($url);

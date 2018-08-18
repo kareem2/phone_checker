@@ -64,4 +64,86 @@
    </div>
    <!-- /.panel-body -->
 </div>
+
+<div class="panel panel-default">
+   <div class="panel-heading">
+       <i class="fa fa-edit fa-fw"></i> Add Comment
+   </div>
+   <!-- /.panel-heading -->
+   <div class="panel-body">
+       <div class="row">
+           <div class="col-lg-12">
+           <form id="rateForm" name="rateForm" method="post" role="form" action="{{app_url}}/add_comment">
+               <div class="form-group">
+                   <label>Your Name:</label>
+                   <input class="form-control" name="name" id="name" required="">
+               </div>
+                   <div class="form-group">
+                       <input type="hidden" name="phone_number" value="{{details.area_code}}{{details.code}}{{suffix}}">
+
+                       <input type="hidden" name="rate" id="rate" value="0">
+                       <div id="rate_desc">Default rating for this phone number is 0, please choose your rating.</div>
+                       <label>Rate:</label>
+                       <button type="button" id="rating-5" class="btn btn-danger ratingb" onclick="rating(-5);"> -5
+                       </button>
+                       <button type="button" id="rating-4" class="btn btn-danger ratingb" onclick="rating(-4);"> -4
+                       </button>
+                       <button type="button" id="rating-3" class="btn btn-danger ratingb" onclick="rating(-3);"> -3
+                       </button>
+                       <button type="button" id="rating-2" class="btn btn-danger ratingb" onclick="rating(-2);"> -2
+                       </button>
+                       <button type="button" id="rating-1" class="btn btn-danger ratingb" onclick="rating(-1);"> -1
+                       </button>
+                       <button type="button" id="rating0" class="btn btn-info ratingb picked" onclick="rating(0);"> 0
+                       </button>
+                       <button type="button" id="rating1" class="btn btn-primary ratingb" onclick="rating(1);"> 1
+                       </button>
+                       <button type="button" id="rating2" class="btn btn-primary ratingb" onclick="rating(2);"> 2
+                       </button>
+                       <button type="button" id="rating3" class="btn btn-primary ratingb" onclick="rating(3);"> 3
+                       </button>
+                       <button type="button" id="rating4" class="btn btn-primary ratingb" onclick="rating(4);"> 4
+                       </button>
+                       <button type="button" id="rating5" class="btn btn-primary ratingb" onclick="rating(5);"> 5
+                       </button>                                            
+                       
+                   </div>
+                   <div class="form-group">
+                       <div id="rate_desc">Please categorize the call type.
+                       </div>
+                       <label>Call Type:</label>
+                       <select name="calltype" id="calltype" class="form-control">
+                           <option value="1" selected="">Unknown</option>
+                           <option value="2">Scam</option>
+                           <option value="3">Telemarketer</option>
+                           <option value="4">Harassment</option>
+                           <option value="5">Survey</option>
+                           <option value="6">Political Call</option>
+                           <option value="7">Spam</option>
+                           <option value="8">Debt Collector</option>
+                           <option value="9">Prank Call</option>
+                           <option value="10">Positive</option>
+                       </select>
+                   </div>
+               
+               <div class="form-group">
+                   <label>Your Comment:</label>
+                   <textarea class="form-control" name="comment" id="comment" rows="3" required=""></textarea>
+               </div>
+               <br>
+               <button type="submit" class="btn btn-primary">Submit</button>
+               
+           </form>
+           </div>
+       </div>
+       <!-- /.row -->
+   </div>
+   <!-- /.panel-body -->
+</div>
+
+<script type="text/javascript">
+   function rating(rate){
+      $("#rate").val(rate);
+   }
+</script>
 {% endblock %}
