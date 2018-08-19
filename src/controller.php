@@ -54,19 +54,17 @@ class Controller
 			$details = $this->db->selectSingle('phone_details', ['area_code' => $area_code, 'code' => $prefix]);
 
 			$comments = $this->db->select('comment', ['phone_number' => $number]);
-			//var_dump($comments);
-			//var_dump([$area_code, $prefix, $phone, $details]);
+
 			$this->twig->display('phone_details.html.twig', array('details' => $details, 'suffix' => $phone, 'comments' => $comments));
+
 			die();
 		}
-		$this->twig->display('phone_details.html.twig', array('content' => $number));
-		return;
 	}	
 
 	public function addComment($data){
 
 		$result = $this->db->insert('comment', $data);
-		
+
 		header("location: ". APP_URL."/{$data['phone_number']}");
 		//var_dump($result);
 

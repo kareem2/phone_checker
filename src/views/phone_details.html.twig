@@ -153,9 +153,20 @@
 
        {% for comment in comments %}
            <li class="timeline-inverted">
-               <div class="timeline-badge warning"><i class="fa fa-user"></i>
-               
-               </div>
+
+               {% if comment.rate < 0 %}
+                  <div class="timeline-badge danger">
+                     <i class="fa fa-user"></i>
+                  </div>
+               {% elseif comment.rate > 0 %} 
+                  <div class="timeline-badge success">
+                     <i class="fa fa-user"></i>
+                  </div>  
+               {% else %} 
+                  <div class="timeline-badge">
+                     <i class="fa fa-user"></i>
+                  </div>    
+               {% endif %}  
                <div class="timeline-panel">
                    <div class="timeline-heading">
                        <strong class="timeline-title">{{comment.name|escape}}</strong>&nbsp;&nbsp;
@@ -212,6 +223,9 @@
 
    .timeline:before{
       width: 0px;
+   }
+   .timeline .timeline-badge{
+      padding: 0px;
    }
 </style>
 {% endblock %}
