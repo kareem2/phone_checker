@@ -7,6 +7,8 @@ use \Router;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
+if (!session_id()) @session_start();
+
 // Dice = autowiring 
 $dice 		= new Dice;
 $controller = $dice->create('\App\Controller\Controller');
@@ -37,17 +39,8 @@ Router::route('/', function() use($controller){
 
 
 
-// eg: /324/some-article-name
-
-Router::route('/([0-9]+)/([^/]+)', function($id, $article_name) use($controller){
-	$controller -> itemPage($id, $article_name);
-});
-
-
 Router::route('([0-9]{3})-([0-9]{3})-([0-9]{4})', function($area_code, $prefix, $number) use($controller){
-	var_dump([$area_code, $prefix, $number]);
-	die();
-	$controller -> itemPage($id, $article_name);
+	$controller->getPhoneDetails($area_code.$prefix.$number);
 });
 
 Router::route('([0-9]{10})', function($full_number) use($controller){
@@ -76,7 +69,7 @@ Router::route('add_comment', function() use($controller){
 
 if (false === Router::execute($url)) {
 	var_dump($url);
-	echo '404c';
+	echo '404';
 }
 
 

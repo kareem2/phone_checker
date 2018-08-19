@@ -137,11 +137,20 @@ class __TwigTemplate_4fa4c7d67138d787b21e8ed77f24e8272da83b6a781bf22941be9e71cb0
                <div class=\"row\">
                   <div class=\"row\">
                      <div class=\"col-lg-8\">
+                        <div class=\"row flash-messages\">
+                            <div class=\"col-sm-12\">
+                                ";
+        // line 115
+        $this->loadTemplate("flash_messages.html.twig", "base2.html.twig", 115)->display($context);
+        // line 116
+        echo "                            </div>
+                        </div>
+
                         <br>
                         ";
-        // line 114
+        // line 120
         $this->displayBlock('body', $context, $blocks);
-        // line 115
+        // line 121
         echo "                     </div>
                      <!-- /.col-lg-9 -->
                      <div class=\"col-lg-4\" style=\"max-width:330px !important;\">
@@ -253,6 +262,12 @@ class __TwigTemplate_4fa4c7d67138d787b21e8ed77f24e8272da83b6a781bf22941be9e71cb0
              });
          }
       </script>
+
+      <style type=\"text/css\">
+         .flash-messages{
+            margin-top: 5px;
+         }
+      </style>
    </body>
 </html>";
     }
@@ -263,7 +278,7 @@ class __TwigTemplate_4fa4c7d67138d787b21e8ed77f24e8272da83b6a781bf22941be9e71cb0
         echo "Home Page";
     }
 
-    // line 114
+    // line 120
     public function block_body($context, array $blocks = array())
     {
     }
@@ -273,9 +288,14 @@ class __TwigTemplate_4fa4c7d67138d787b21e8ed77f24e8272da83b6a781bf22941be9e71cb0
         return "base2.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  267 => 114,  261 => 10,  145 => 115,  143 => 114,  36 => 10,  25 => 1,);
+        return array (  282 => 120,  276 => 10,  154 => 121,  152 => 120,  146 => 116,  144 => 115,  36 => 10,  25 => 1,);
     }
 
     public function getSourceContext()

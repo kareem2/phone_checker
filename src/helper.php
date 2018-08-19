@@ -4,16 +4,18 @@ namespace App\Helper;
 
 use \Twig_Loader_Filesystem;
 use \Twig_Environment;
+use \Plasticbrain\FlashMessages\FlashMessages;
 
 /**
  * 
  */
 class Helper
 {
-	
+	private $msg;
 	function __construct()
 	{
 		# code...
+		$this->msg = new FlashMessages();
 	}
 
 	public function showExecutionTime()
@@ -107,5 +109,50 @@ class Helper
 	    }
 	  
 	    return $trimmed_text;
+	}
+
+
+	public function flashMessage($type, $message){
+		if($type == 'info'){
+			$this->msg->info($message);
+		}else if($type == 'success'){
+			$this->msg->success($message);
+		}else if($type == 'warning'){
+			$this->msg->warning($message);
+		}else if($type == 'error'){
+			$this->msg->error($message);		
+		} 
+	}
+
+	public function getFlashMessages($types = []){
+		ob_start();
+		$this->msg->display();
+		$messgs = ob_get_contents();
+		ob_end_clean();
+		return $messgs;
+
+		
+		if(!isset($_SESSION['flash_messages']))
+			return [];
+		if(empty($types)){
+			$messages = $_SESSION['flash_messages'];
+		}else{
+			$messages = $_SESSION['flash_messages'][$types];
+		}
+		/*
+        if ((is_array($types) && empty($types)) || is_null($types) || !$types) {
+            unset($_SESSION['flash_messages']);
+        } elseif (!is_array($types)) {
+            $types = [$types];
+        }
+
+        foreach ($types as $type) {
+            unset($_SESSION['flash_messages'][$type]);
+        }*/
+
+        unset($_SESSION['flash_messages']);
+        return $messages;
+
+		//$this->msg->clear();
 	}
 }

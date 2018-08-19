@@ -14,11 +14,19 @@ class Controller
 
 	public function __construct(Model $db, Helper $app) 
 	{
-		$this -> db = $db; 
-		$this -> app = $app;
-		$this -> twig = $app -> loadTwig();
+		$this->db = $db; 
+		$this->app = $app;
+		$this->twig = $app->loadTwig();
+		//var_dump($this->app->getFlashMessages());
 
 		$this->twig->addGlobal('app_url', APP_URL);
+		
+		$flashMessages = new \Twig_Function('FlashMessages', function($type = []) {
+		    return $this->app->getFlashMessages($type);
+
+		});
+		$this->twig->addFunction($flashMessages);
+
 	}
 
 	public function homePage()
@@ -33,7 +41,7 @@ class Controller
  	public function itemPage($id, $article_name)
 	{	
 
-		$content = $this -> db -> itemPage($id);
+		$content = $this->db->itemPage($id);
 		
 		/*if ($this->app->checkFor404($content, $article_name))
 			return;*/
@@ -54,7 +62,7 @@ class Controller
 			$details = $this->db->selectSingle('phone_details', ['area_code' => $area_code, 'code' => $prefix]);
 
 			$comments = $this->db->select('comment', ['phone_number' => $number]);
-
+			//var_dump($this->app->getFlashMessages());
 			$this->twig->display('phone_details.html.twig', array('details' => $details, 'suffix' => $phone, 'comments' => $comments));
 
 			die();
@@ -64,6 +72,8 @@ class Controller
 	public function addComment($data){
 
 		$result = $this->db->insert('comment', $data);
+
+		$this->app->flashMessage('success', 'Thank you for your feedback');
 
 		header("location: ". APP_URL."/{$data['phone_number']}");
 		//var_dump($result);
