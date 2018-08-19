@@ -130,29 +130,5 @@ class Helper
 		$messgs = ob_get_contents();
 		ob_end_clean();
 		return $messgs;
-
-		
-		if(!isset($_SESSION['flash_messages']))
-			return [];
-		if(empty($types)){
-			$messages = $_SESSION['flash_messages'];
-		}else{
-			$messages = $_SESSION['flash_messages'][$types];
-		}
-		/*
-        if ((is_array($types) && empty($types)) || is_null($types) || !$types) {
-            unset($_SESSION['flash_messages']);
-        } elseif (!is_array($types)) {
-            $types = [$types];
-        }
-
-        foreach ($types as $type) {
-            unset($_SESSION['flash_messages'][$type]);
-        }*/
-
-        unset($_SESSION['flash_messages']);
-        return $messages;
-
-		//$this->msg->clear();
 	}
 }
