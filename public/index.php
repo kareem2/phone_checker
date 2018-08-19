@@ -51,9 +51,7 @@ Router::route('([0-9]{3})-([0-9]{3})-([0-9]{4})', function($area_code, $prefix, 
 });
 
 Router::route('([0-9]{10})', function($full_number) use($controller){
-	var_dump([$full_number]);
-	die();
-	$controller -> itemPage($id, $article_name);
+	$controller->getPhoneDetails($full_number);
 });
 
 Router::route('([0-9]{3})-([0-9]{3})-([0-9]{2})', function($area_code, $prefix, $number) use($controller){
