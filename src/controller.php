@@ -66,8 +66,7 @@ class Controller
 	public function addComment($data){
 
 		$result = $this->db->insert('comment', $data);
-		var_dump($data);
-		die();
+		
 		header("location: ". APP_URL."/{$data['phone_number']}");
 		//var_dump($result);
 
