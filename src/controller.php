@@ -61,7 +61,7 @@ class Controller
 
 			$overall_rating = floor($this->db->query("select sum(rate)/count(*) rating from comments", ['phone_number' => $number])[0]['rating']);
 
-			$overall_reports = $this->db->query("select count(*) reports from comments", ['phone_number' => $number, 'rating < 0'])[0]['reports'];
+			$overall_reports = $this->db->query("select count(*) reports from comments", ['phone_number' => $number, ':raw' => 'rate < 0'])[0]['reports'];
 
 			//var_dump($overall_reports);
 

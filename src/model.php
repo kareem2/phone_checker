@@ -89,18 +89,21 @@ class Model
 	}
 
 	public function query($sql_query, $parameters){
-		
+
 		$where_clause = $this->buildWhere($parameters);
 
 		$sql_query = $sql_query . " $where_clause";
-
+		//var_dump($sql_query);
 		$stmt = $this->db->prepare($sql_query);
 
 		foreach ($parameters as $key => &$value) {
-			$stmt->bindParam(':'.$key, $value);
+			//var_dump($key);
+			if($key !== ':raw')
+				$stmt->bindParam(':'.$key, $value);
 		}
 
-		
+		//return;
+		//die();
 		$stmt->execute();
 
 
@@ -112,8 +115,15 @@ class Model
 		$where_clause = 'where 1 = 1 ';
 
 		foreach ($where as $key => $value) {
-			$where_clause = $where_clause . " AND $key = :$key ";
+			if($key == ':raw'){
+				$where_clause = $where_clause . " AND $value ";
+			}else{
+				$where_clause = $where_clause . " AND $key = :$key ";
+			}
+			
+
 		}	
+		////var_dump($where_clause);
 
 		return $where_clause;	
 	}
@@ -129,6 +139,8 @@ class Model
 			SELECT * 
 			from $table 
 			$where_clause $order_by";
+
+
 
 		$stmt = $this->db->prepare($sql_query);
 
