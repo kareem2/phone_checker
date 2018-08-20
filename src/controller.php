@@ -70,12 +70,21 @@ class Controller
 				'code' => $prefix]]
 			);
 
+			if(!isset($details) || empty($details)){
+				$this->app->flashMessage('error', 'The number you search for is not found');
+
+				header("location: ". APP_URL);
+				die();
+			}
 			$comments = $this->db->select('comments', ['phone_number' => $number], " order by created_at DESC");
 			//var_dump($this->app->getFlashMessages());
 			$this->twig->display('phone_details.html.twig', array('details' => $details, 'suffix' => $phone, 'comments' => $comments, 'overall_rating' => $overall_rating, 'overall_reports' => $overall_reports));
 
 			die();
 		}
+
+
+
 	}	
 
 	public function addComment($data){
