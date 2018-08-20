@@ -75,7 +75,10 @@ class __TwigTemplate_4fa4c7d67138d787b21e8ed77f24e8272da83b6a781bf22941be9e71cb0
                   <span class=\"icon-bar\"></span>
                   <span class=\"icon-bar\"></span>
                   </button>
-                  <a class=\"navbar-brand\" href=\"/\">Check Caller Number</a>
+                  <a class=\"navbar-brand\" href=\"";
+        // line 51
+        echo ($context["app_url"] ?? null);
+        echo "\">Check Caller Number</a>
                </div>
                <!-- /.navbar-header -->
                <div class=\"search-bar\" style=\"padding-right:60px !important;\">
@@ -267,6 +270,9 @@ class __TwigTemplate_4fa4c7d67138d787b21e8ed77f24e8272da83b6a781bf22941be9e71cb0
          .flash-messages{
             margin-top: 5px;
          }
+         .close{
+            text-indent: 0;
+         }
       </style>
    </body>
 </html>";
@@ -295,7 +301,7 @@ class __TwigTemplate_4fa4c7d67138d787b21e8ed77f24e8272da83b6a781bf22941be9e71cb0
 
     public function getDebugInfo()
     {
-        return array (  282 => 120,  276 => 10,  154 => 121,  152 => 120,  146 => 116,  144 => 115,  36 => 10,  25 => 1,);
+        return array (  288 => 120,  282 => 10,  157 => 121,  155 => 120,  149 => 116,  147 => 115,  80 => 51,  36 => 10,  25 => 1,);
     }
 
     public function getSourceContext()

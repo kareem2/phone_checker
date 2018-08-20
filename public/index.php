@@ -22,9 +22,11 @@ Router::route('/phone_checker/public/', function() use($controller){
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		//die('sdgfds');
 		$phone_number = $_POST['number'];
-		$controller->getPhoneDetails($phone_number);
+		header("location: " . APP_URL . '/'. $phone_number);
+		die();
+		//$controller->getPhoneDetails($phone_number);
 	}else{
-		$controller -> homePage();
+		$controller->homePage();
 	}
 
 });
@@ -66,6 +68,8 @@ Router::route('add_comment', function() use($controller){
 	//die();
 	$controller->addComment($_POST);
 });
+
+//var_dump($url);
 
 if (false === Router::execute($url)) {
 	var_dump($url);

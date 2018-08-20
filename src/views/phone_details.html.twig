@@ -13,8 +13,8 @@
    <div class="panel-body">
       <div id="phone-number">
          {{details.area_code}}-{{details.code}}-{{suffix}}
-         <span class="rating">Report: <label class="warning">0</label></span>
-         <span class="rating">Rating: <label class="warning">0</label></span>
+         <span class="rating">Report: <label class="warning">{{overall_reports}}</label></span>
+         <span class="rating">Rating: <label class="warning">{{overall_rating}}</label></span>
       </div>
       <div class="clearfix"></div>
       <div class="">
@@ -169,23 +169,16 @@
                {% endif %}  
                <div class="timeline-panel">
                    <div class="timeline-heading">
-                       <strong class="timeline-title">{{comment.name|escape}}</strong>&nbsp;&nbsp;
+                       <strong class="timeline-title">{{comment.name|escape}}</strong>
                        <small class="text-muted ">
                            <i class="fa fa-clock-o fa-fw"></i>{{comment.created_at|escape}}</small>                 
                        <br>
                        <strong class="primary-font">Phone number: </strong><a href="/{{details.area_code}}{{details.code}}{{suffix}}">+1 ({{details.area_code}}) {{details.code}}-{{suffix}}</a><br>
-                       <strong class="primary-font">Call type: </strong>{{comment.name|escape}}<br>
+                       <strong class="primary-font">Call type: </strong>{{comment.call_type|escape}}<br>
                        <strong class="primary-font">Rating: </strong>{{comment.rate|escape}}<br>
                    </div>
                    <div class="timeline-body">
                        <p>{{comment.comment|escape}}</p>
-                     <!--   <div>
-                           <a href="javascript:reply(39637);">Reply</a>
-                           - <a href="javascript:like(39637);"><i class="fa fa-thumbs-o-up fa-fw comment-like"></i></a> <span class="text-muted" id="like_39637">0</span>
-                           - <a href="javascript:dislike(39637);"><i class="fa fa-thumbs-o-down fa-fw comment-like"></i></a> <span class="text-muted" id="dislike_39637">0</span>
-
-                           <div id="comment_39637" class="child-comment" num="3606222899" rate="0" calltype="unknown" style="display:none;"></div>
-                       </div> -->
                   </div>
                </div>
            </li>           

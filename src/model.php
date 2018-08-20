@@ -82,12 +82,43 @@ class Model
 
 	}
 
-	public function selectSingle($table, $data){
-		return $this->select($table, $data, true);
+	public function selectSingle($table, $options){
+		$options['single'] = true;
+		//return $this->select($table, $data, $order_by, true);
+		return $this->select2($table, $options);
+	}
+
+	public function query($sql_query, $parameters){
+		
+		$where_clause = $this->buildWhere($parameters);
+
+		$sql_query = $sql_query . " $where_clause";
+
+		$stmt = $this->db->prepare($sql_query);
+
+		foreach ($parameters as $key => &$value) {
+			$stmt->bindParam(':'.$key, $value);
+		}
+
+		
+		$stmt->execute();
+
+
+		return $stmt->fetchAll();
 
 	}
 
-	public function select($table, $where, $single = false){
+	protected function buildWhere($where){
+		$where_clause = 'where 1 = 1 ';
+
+		foreach ($where as $key => $value) {
+			$where_clause = $where_clause . " AND $key = :$key ";
+		}	
+
+		return $where_clause;	
+	}
+
+	public function select($table, $where, $order_by = null, $single = false){
 		$where_clause = 'where 1 = 1 ';
 		
 		foreach ($where as $key => $value) {
@@ -97,12 +128,11 @@ class Model
 		$sql_query = "
 			SELECT * 
 			from $table 
-			$where_clause";
+			$where_clause $order_by";
 
 		$stmt = $this->db->prepare($sql_query);
 
 		foreach ($where as $key => &$value) {
-
 			$stmt->bindParam(':'.$key, $value);
 		}
 
@@ -120,78 +150,47 @@ class Model
 		return $stmt->fetchAll();
 
 	}
-	/*
-	public function getCountryById($id){
+
+	public function select2($table, $options){
+		//$where_clause = 'where 1 = 1 ';
+
+		$where_clause = $this->buildWhere($options['conditions']);
+
+
+		$order_by = null;
+		if(isset($options['order']) && is_null($options['order'])){
+			$order_by = 'order by ' . $options['order'];
+		}
+
+		// foreach ($options['conditions'] as $key => $value) {
+		// 	$where_clause = $where_clause . " AND $key = :$key ";
+		// }
+
 		$sql_query = "
 			SELECT * 
-			from country 
-			where id = $id";
+			from $table 
+			$where_clause $order_by";
 
-		$stmt = $this->db->prepare($sql_query); // stmt = statement
-		$stmt -> execute();
+		$stmt = $this->db->prepare($sql_query);
+
+		foreach ($options['conditions'] as $key => &$value) {
+			$stmt->bindParam(':'.$key, $value);
+		}
+
 		
-		return $sql_res = $stmt -> fetch();		
-	}
-
-	public function getCountryByName($name){
-		$sql_query = "
-			SELECT * 
-			from country 
-			where name = $name";
-
-		$stmt = $this->db->prepare($sql_query); // stmt = statement
-		$stmt -> execute();
+		$stmt->execute();
 		
-		return $sql_res = $stmt -> fetch();		
-	}
-
-	public function insertCountry($name){
-		$sql_query = "INSERT INTO country(name) values('$name')";
-
-		$stmt = $this->db->prepare($sql_query); // stmt = statement
-		$result = $stmt -> execute();		
-
-		return $result;
-	}
-
-
-
-
-
-	public function getCompanyById($id){
-		$sql_query = "
-			SELECT * 
-			from company 
-			where id = $id";
-
-		$stmt = $this->db->prepare($sql_query); // stmt = statement
-		$stmt -> execute();
+		if($options['single'] == true){
+			$result = $stmt->fetch();
+			if(!empty($result)){
+				return $result;
+			}
+			return [];
+		}
 		
-		return $sql_res = $stmt -> fetch();		
-	}
+		return $stmt->fetchAll();
 
-	public function getCompanyByName($name){
-		$sql_query = "
-			SELECT * 
-			from company 
-			where name = $name";
-
-		$stmt = $this->db->prepare($sql_query); // stmt = statement
-		$stmt -> execute();
-		
-		return $sql_res = $stmt -> fetch();		
 	}	
-
-	public function insertCompany($name){
-		$sql_query = "INSERT INTO company(name) values('$name')";
-
-		$stmt = $this->db->prepare($sql_query); // stmt = statement
-		$result = $stmt -> execute();		
-
-		return $result;
-	}
-	*/
-	
 
 }
 
