@@ -14,3 +14,17 @@ create or replace view comments as
 select comment.*, call_type.name as call_type
 from comment, call_type
 where comment.call_type_id = call_type.id;
+
+
+INSERT INTO `call_type` (`id`, `name`) VALUES
+(1, 'Unknown'),
+(2, 'Scam'),
+(3, 'Telemarketer'),
+(4, 'Harassment'),
+(5, 'Survey'),
+(6, 'Political Call'),
+(7, 'Spam'),
+(8, 'Debt Collector'),
+(9, 'Prank Call'),
+(10, 'Positive');
+COMMIT;

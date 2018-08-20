@@ -89,7 +89,7 @@ class Model
 	}
 
 	public function query($sql_query, $parameters){
-
+		
 		$where_clause = $this->buildWhere($parameters);
 
 		$sql_query = $sql_query . " $where_clause";
@@ -129,8 +129,6 @@ class Model
 			SELECT * 
 			from $table 
 			$where_clause $order_by";
-
-		var_dump($sql_query);
 
 		$stmt = $this->db->prepare($sql_query);
 
