@@ -20,23 +20,22 @@ $helper 	= $dice->create('\App\Helper\Helper');
 
 Router::route('/phone_checker/public/', function() use($controller){
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		//die('sdgfds');
 		$phone_number = $_POST['number'];
 		header("location: " . APP_URL . '/'. $phone_number);
 		die();
-		//$controller->getPhoneDetails($phone_number);
 	}else{
 		$controller->homePage();
 	}
-
 });
 
 Router::route('/', function() use($controller){
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$phone_number = $_POST['number'];
-		$controller->getPhoneDetails($phone_number);
+		header("location: " . APP_URL . '/'. $phone_number);
+		die();
+	}else{
+		$controller->homePage();
 	}
-	$controller -> homePage();
 });
 
 
