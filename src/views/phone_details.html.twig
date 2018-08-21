@@ -173,7 +173,7 @@
                        <small class="text-muted ">
                            <i class="fa fa-clock-o fa-fw"></i>{{comment.created_at|escape}}</small>                 
                        <br>
-                       <strong class="primary-font">Phone number: </strong><a href="/{{details.area_code}}{{details.code}}{{suffix}}">+1 ({{details.area_code}}) {{details.code}}-{{suffix}}</a><br>
+                       <strong class="primary-font">Phone number: </strong><a href="{{app_url}}/{{details.area_code}}{{details.code}}{{suffix}}">+1 ({{details.area_code}}) {{details.code}}-{{suffix}}</a><br>
                        <strong class="primary-font">Call type: </strong>{{comment.call_type|escape}}<br>
                        <strong class="primary-font">Rating: </strong>{{comment.rate|escape}}<br>
                    </div>

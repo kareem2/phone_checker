@@ -52,7 +52,7 @@
                </div>
                <!-- /.navbar-header -->
                <div class="search-bar" style="padding-right:60px !important;">
-                  <form name="form" method="get" action="./search">
+                  <form name="form" method="post" action="{{app_url}}">
                      <div class="input-group custom-search-form search-bar">
                         <input name="number" type="text" class="form-control" placeholder="Search..." required="">
                         <span class="input-group-btn">
@@ -138,66 +138,40 @@
                            </div>
                         </div>
                         <h3>Recent Comments</h3>
-                        <div class="chat-panel panel panel-danger">
-                           <div class="panel-heading">
-                              <a href="/260-593-1121">+1 (260) 593-1121</a>
-                           </div>
-                           <!-- /.panel-heading -->
-                           <div class="panel-body">
-                              <ul class="chat">
-                                 <li class="left clearfix">
-                                    <span class="chat-img pull-right">
-                                       <div class="comment-badge danger"><i class="fa fa-user"></i></div>
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                       <div class="header clearfix">
-                                          <strong class="primary-font">Jodie hailey</strong><br>
-                                          <small class="pull-left text-muted clearfix">
-                                          <i class="fa fa-clock-o fa-fw"></i> 2018-08-16 04:42:44                            </small><br>
-                                          <strong class="primary-font">Call type: </strong>scam<br>
-                                          <strong class="primary-font">Rating: </strong>-5<br>
+                        {% for comment in recent_comments %}
+                        
+                           {% if comment.rate < 0 %}
+                               <div class="chat-panel panel panel-danger">
+                           {% else %}
+                               <div class="chat-panel panel panel">
+                           {% endif %}
+                              <div class="panel-heading">
+                                 <a href="{{app_url}}/{{comment.phone_number}}">+1 ({{comment.phone_number|slice(0, 3)}}) {{comment.phone_number|slice(3, 3)}}-{{comment.phone_number|slice(6, 4)}}</a>
+                              </div>
+                              <!-- /.panel-heading -->
+                              <div class="panel-body">
+                                 <ul class="chat">
+                                    <li class="left clearfix">
+                                       <span class="chat-img pull-right">
+                                          <div class="comment-badge danger"><i class="fa fa-user"></i></div>
+                                       </span>
+                                       <div class="chat-body clearfix">
+                                          <div class="header clearfix">
+                                             <strong class="primary-font">{{comment.name|escape}}</strong><br>
+                                             <small class="pull-left text-muted clearfix">
+                                             <i class="fa fa-clock-o fa-fw"></i>{{comment.created_at|escape}}</small><br>
+                                             <strong class="primary-font">Call type: </strong>{{comment.call_type|escape}}<br>
+                                             <strong class="primary-font">Rating: </strong>{{comment.rate|escape}}<br>
+                                          </div>
+                                          <p>{{comment.comment|escape}}</p>
                                        </div>
-                                       <p>
-                                          Are you a photographer?  Family reunion.  Do you take credit cards                        
-                                       </p>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </div>
-                           <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel .chat-panel -->
-                        <!-- /.panel .chat-panel -->
-                        <div class="chat-panel panel panel-default">
-                           <div class="panel-heading">
-                              <a href="/829-587-2358">+1 (829) 587-2358</a>
-                           </div>
-                           <!-- /.panel-heading -->
-                           <div class="panel-body">
-                              <ul class="chat">
-                                 <li class="left clearfix">
-                                    <span class="chat-img pull-right">
-                                       <div class="comment-badge warning"><i class="fa fa-user"></i></div>
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                       <div class="header clearfix">
-                                          <strong class="primary-font">Rajesh kumar</strong><br>
-                                          <small class="pull-left text-muted clearfix">
-                                          <i class="fa fa-clock-o fa-fw"></i> 2018-08-16 00:36:09                            </small><br>
-                                          <strong class="primary-font">Call type: </strong>unknown<br>
-                                          <strong class="primary-font">Rating: </strong>0<br>
-                                       </div>
-                                       <p>
-                                          Fhx                        
-                                       </p>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </div>
-                           <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel .chat-panel -->
-                        <!-- /.panel .chat-panel -->
+                                    </li>
+                                 </ul>
+                              </div>
+                              <!-- /.panel-body -->
+                           </div>                        
+
+                        {% endfor %}
                         <div class="well well-sm well-default text-center"><a href="/comments">Read more comments</a></div>
                      </div>
                      <!-- /.col-lg-3 -->

@@ -19,7 +19,11 @@ class Controller
 		$this->twig = $app->loadTwig();
 		//var_dump($this->app->getFlashMessages());
 
+		$recent_comments = $this->db->select('comments', [], " order by id DESC limit 10");
+		//var_dump($recent_comments);
+
 		$this->twig->addGlobal('app_url', APP_URL);
+		$this->twig->addGlobal('recent_comments', $recent_comments);
 		
 		$flashMessages = new \Twig_Function('FlashMessages', function($type = []) {
 		    return $this->app->getFlashMessages($type);

@@ -82,7 +82,10 @@ class __TwigTemplate_4fa4c7d67138d787b21e8ed77f24e8272da83b6a781bf22941be9e71cb0
                </div>
                <!-- /.navbar-header -->
                <div class=\"search-bar\" style=\"padding-right:60px !important;\">
-                  <form name=\"form\" method=\"get\" action=\"./search\">
+                  <form name=\"form\" method=\"post\" action=\"";
+        // line 55
+        echo ($context["app_url"] ?? null);
+        echo "\">
                      <div class=\"input-group custom-search-form search-bar\">
                         <input name=\"number\" type=\"text\" class=\"form-control\" placeholder=\"Search...\" required=\"\">
                         <span class=\"input-group-btn\">
@@ -174,67 +177,84 @@ class __TwigTemplate_4fa4c7d67138d787b21e8ed77f24e8272da83b6a781bf22941be9e71cb0
                            </div>
                         </div>
                         <h3>Recent Comments</h3>
-                        <div class=\"chat-panel panel panel-danger\">
-                           <div class=\"panel-heading\">
-                              <a href=\"/260-593-1121\">+1 (260) 593-1121</a>
-                           </div>
-                           <!-- /.panel-heading -->
-                           <div class=\"panel-body\">
-                              <ul class=\"chat\">
-                                 <li class=\"left clearfix\">
-                                    <span class=\"chat-img pull-right\">
-                                       <div class=\"comment-badge danger\"><i class=\"fa fa-user\"></i></div>
-                                    </span>
-                                    <div class=\"chat-body clearfix\">
-                                       <div class=\"header clearfix\">
-                                          <strong class=\"primary-font\">Jodie hailey</strong><br>
-                                          <small class=\"pull-left text-muted clearfix\">
-                                          <i class=\"fa fa-clock-o fa-fw\"></i> 2018-08-16 04:42:44                            </small><br>
-                                          <strong class=\"primary-font\">Call type: </strong>scam<br>
-                                          <strong class=\"primary-font\">Rating: </strong>-5<br>
+                        ";
+        // line 141
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(($context["recent_comments"] ?? null));
+        foreach ($context['_seq'] as $context["_key"] => $context["comment"]) {
+            // line 142
+            echo "                        
+                           ";
+            // line 143
+            if ((twig_get_attribute($this->env, $this->source, $context["comment"], "rate", array()) < 0)) {
+                // line 144
+                echo "                               <div class=\"chat-panel panel panel-danger\">
+                           ";
+            } else {
+                // line 146
+                echo "                               <div class=\"chat-panel panel panel\">
+                           ";
+            }
+            // line 148
+            echo "                              <div class=\"panel-heading\">
+                                 <a href=\"";
+            // line 149
+            echo ($context["app_url"] ?? null);
+            echo "/";
+            echo twig_get_attribute($this->env, $this->source, $context["comment"], "phone_number", array());
+            echo "\">+1 (";
+            echo twig_slice($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "phone_number", array()), 0, 3);
+            echo ") ";
+            echo twig_slice($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "phone_number", array()), 3, 3);
+            echo "-";
+            echo twig_slice($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "phone_number", array()), 6, 4);
+            echo "</a>
+                              </div>
+                              <!-- /.panel-heading -->
+                              <div class=\"panel-body\">
+                                 <ul class=\"chat\">
+                                    <li class=\"left clearfix\">
+                                       <span class=\"chat-img pull-right\">
+                                          <div class=\"comment-badge danger\"><i class=\"fa fa-user\"></i></div>
+                                       </span>
+                                       <div class=\"chat-body clearfix\">
+                                          <div class=\"header clearfix\">
+                                             <strong class=\"primary-font\">";
+            // line 160
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "name", array()));
+            echo "</strong><br>
+                                             <small class=\"pull-left text-muted clearfix\">
+                                             <i class=\"fa fa-clock-o fa-fw\"></i>";
+            // line 162
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "created_at", array()));
+            echo "</small><br>
+                                             <strong class=\"primary-font\">Call type: </strong>";
+            // line 163
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "call_type", array()));
+            echo "<br>
+                                             <strong class=\"primary-font\">Rating: </strong>";
+            // line 164
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "rate", array()));
+            echo "<br>
+                                          </div>
+                                          <p>";
+            // line 166
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "comment", array()));
+            echo "</p>
                                        </div>
-                                       <p>
-                                          Are you a photographer?  Family reunion.  Do you take credit cards                        
-                                       </p>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </div>
-                           <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel .chat-panel -->
-                        <!-- /.panel .chat-panel -->
-                        <div class=\"chat-panel panel panel-default\">
-                           <div class=\"panel-heading\">
-                              <a href=\"/829-587-2358\">+1 (829) 587-2358</a>
-                           </div>
-                           <!-- /.panel-heading -->
-                           <div class=\"panel-body\">
-                              <ul class=\"chat\">
-                                 <li class=\"left clearfix\">
-                                    <span class=\"chat-img pull-right\">
-                                       <div class=\"comment-badge warning\"><i class=\"fa fa-user\"></i></div>
-                                    </span>
-                                    <div class=\"chat-body clearfix\">
-                                       <div class=\"header clearfix\">
-                                          <strong class=\"primary-font\">Rajesh kumar</strong><br>
-                                          <small class=\"pull-left text-muted clearfix\">
-                                          <i class=\"fa fa-clock-o fa-fw\"></i> 2018-08-16 00:36:09                            </small><br>
-                                          <strong class=\"primary-font\">Call type: </strong>unknown<br>
-                                          <strong class=\"primary-font\">Rating: </strong>0<br>
-                                       </div>
-                                       <p>
-                                          Fhx                        
-                                       </p>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </div>
-                           <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel .chat-panel -->
-                        <!-- /.panel .chat-panel -->
-                        <div class=\"well well-sm well-default text-center\"><a href=\"/comments\">Read more comments</a></div>
+                                    </li>
+                                 </ul>
+                              </div>
+                              <!-- /.panel-body -->
+                           </div>                        
+
+                        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['comment'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 175
+        echo "                        <div class=\"well well-sm well-default text-center\"><a href=\"/comments\">Read more comments</a></div>
                      </div>
                      <!-- /.col-lg-3 -->
                   </div>
@@ -301,7 +321,7 @@ class __TwigTemplate_4fa4c7d67138d787b21e8ed77f24e8272da83b6a781bf22941be9e71cb0
 
     public function getDebugInfo()
     {
-        return array (  288 => 120,  282 => 10,  157 => 121,  155 => 120,  149 => 116,  147 => 115,  80 => 51,  36 => 10,  25 => 1,);
+        return array (  308 => 120,  302 => 10,  257 => 175,  242 => 166,  237 => 164,  233 => 163,  229 => 162,  224 => 160,  202 => 149,  199 => 148,  195 => 146,  191 => 144,  189 => 143,  186 => 142,  182 => 141,  160 => 121,  158 => 120,  152 => 116,  150 => 115,  87 => 55,  80 => 51,  36 => 10,  25 => 1,);
     }
 
     public function getSourceContext()
