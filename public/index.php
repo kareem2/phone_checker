@@ -1,11 +1,15 @@
 <?php
-
 namespace App;
+
+
+require_once __DIR__.'/../vendor/autoload.php';
 
 use \Dice\Dice;
 use \Router;
+use Symfony\Component\Cache\Adapter\PdoAdapter;
+use \App\Model\Model;
 
-require_once __DIR__.'/../vendor/autoload.php';
+$cache = new PdoAdapter(Model::getPdoConnection());
 
 if (!session_id()) @session_start();
 
@@ -14,6 +18,7 @@ $dice 		= new Dice;
 $controller = $dice->create('\App\Controller\Controller');
 $helper 	= $dice->create('\App\Helper\Helper');
 
+//$controller->recentComments(5, 2);
 /**
 * Router
 */
@@ -66,6 +71,11 @@ Router::route('add_comment', function() use($controller){
 	var_dump($_POST);
 	//die();
 	$controller->addComment($_POST);
+});
+
+Router::route('comments/([0-9]*)', function($page) use($controller){
+	//die('show comments');
+	$controller->recentComments(10, $page);
 });
 
 //var_dump($url);

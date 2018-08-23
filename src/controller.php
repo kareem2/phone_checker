@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use \App\Model\Model;
 use \App\Helper\Helper;
+use MirazMac\Pagination\Pagination;
 
 class Controller
 {	
@@ -100,6 +101,24 @@ class Controller
 		header("location: ". APP_URL."/{$data['phone_number']}");
 		//var_dump($result);
 
+	}
+
+
+	public function recentComments($limit = 5, $page = 1){
+		$start = ($page - 1) * $limit;
+		$comments = $this->db->query("select * from comments order by id desc limit $start, $limit", []);
+		$total = $this->db->query("select count(*) total from comments", [])[0]['total'];
+		//var_dump($comments);
+		$pagination = new Pagination($total, $page);
+		$pagination->setLineFormat('<li class="@class@"><a href="'.APP_URL.'/comments/@id@">@label@</a></li>');
+		$pages = $pagination->parse();
+		//var_dump($pages);
+		//die();
+		$pages = $pagination->renderHtml($before = '<ul class="pagination-sm pagination">');
+		
+
+		$this->twig->display('recent_comments_page.html.twig', array('comments' => $comments, 'pagination' => $pages));
+		die();
 	}
 
 }

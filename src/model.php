@@ -7,18 +7,24 @@ use \PDO;
 class Model 
 {	
 
-	protected $dsn = "mysql:host=".DB_HOST.";dbname=".DB_NAME.";port=".DB_PORT.";charset=".DB_CHARSET;
-	protected $opt = [
+	protected static $dsn = "mysql:host=".DB_HOST.";dbname=".DB_NAME.";port=".DB_PORT.";charset=".DB_CHARSET;
+	protected static $opt = [
 	    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
 	    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 	    PDO::ATTR_EMULATE_PREPARES   => true,
 	];
 
-	protected $db;
+	protected static $db;
 
 	public function __construct()
 	{
-		$this->db = new PDO($this->dsn, DB_USER, DB_PASS, $this->opt);
+		//self::$db = new PDO($this->dsn, DB_USER, DB_PASS, $this->opt);
+		static::$db = self::getPdoConnection();
+	}
+
+	public static function getPdoConnection()
+	{
+		return new PDO(self::$dsn, DB_USER, DB_PASS, self::$opt);
 	}
 
 	public function homePage() {
@@ -33,7 +39,7 @@ class Model
 			limit 100
 		';
 
-		$stmt = $this->db->prepare($sql_query); // stmt = statement
+		$stmt = self::$db->prepare($sql_query); // stmt = statement
 		$stmt -> execute();
 		
 		return $sql_res = $stmt -> fetchAll();*/
@@ -48,7 +54,7 @@ class Model
 
 
 	public function lastInsertId(){
-		return $this->db->lastInsertId();
+		return self::$db->lastInsertId();
 	}
 
 
@@ -60,7 +66,7 @@ class Model
 
 			$sql_query = "INSERT INTO $table($columns) VALUES($values)";
 		
-			$stmt = $this->db->prepare($sql_query);
+			$stmt = self::$db->prepare($sql_query);
 
 			foreach ($data as $key => &$value) 
 			{
@@ -90,11 +96,14 @@ class Model
 
 	public function query($sql_query, $parameters){
 
-		$where_clause = $this->buildWhere($parameters);
+		$where_clause = '';
+		if(!empty($options['conditions']))
+			$where_clause = $this->buildWhere($parameters);
+
 
 		$sql_query = $sql_query . " $where_clause";
 		//var_dump($sql_query);
-		$stmt = $this->db->prepare($sql_query);
+		$stmt = self::$db->prepare($sql_query);
 
 		foreach ($parameters as $key => &$value) {
 			//var_dump($key);
@@ -142,7 +151,7 @@ class Model
 
 
 
-		$stmt = $this->db->prepare($sql_query);
+		$stmt = self::$db->prepare($sql_query);
 
 		foreach ($where as $key => &$value) {
 			$stmt->bindParam(':'.$key, $value);
@@ -183,7 +192,7 @@ class Model
 			from $table 
 			$where_clause $order_by";
 
-		$stmt = $this->db->prepare($sql_query);
+		$stmt = self::$db->prepare($sql_query);
 
 		foreach ($options['conditions'] as $key => &$value) {
 			$stmt->bindParam(':'.$key, $value);

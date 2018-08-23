@@ -12,7 +12,7 @@ class __TwigTemplate_576dedb95077c1fd1779d81b6b241c6624d1ff9303174bb7f5e2d535133
         $this->source = $this->getSourceContext();
 
         // line 1
-        $this->parent = $this->loadTemplate("base2.html.twig", "main.html.twig", 1);
+        $this->parent = $this->loadTemplate("base.html.twig", "main.html.twig", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'body' => array($this, 'block_body'),
@@ -21,7 +21,7 @@ class __TwigTemplate_576dedb95077c1fd1779d81b6b241c6624d1ff9303174bb7f5e2d535133
 
     protected function doGetParent(array $context)
     {
-        return "base2.html.twig";
+        return "base.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
@@ -92,17 +92,6 @@ class __TwigTemplate_576dedb95077c1fd1779d81b6b241c6624d1ff9303174bb7f5e2d535133
          </div>
       </div>
    </div>
-</div>
-<div>
-   <center>
-      <script async=\"\" src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>
-      <!-- 720*90 -->
-      <ins class=\"adsbygoogle\" style=\"display:inline-block;width:728px;height:90px\" data-ad-client=\"ca-pub-8478027707529283\" data-ad-slot=\"1530569408\"></ins>
-      <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-         
-      </script>
-   </center>
 </div>
 <div class=\"panel panel-default\">
    <div class=\"panel-heading\">

@@ -2,32 +2,186 @@
 <html lang="en">
 
     <head>
-        <title>{% block title %}Home Page{% endblock %}</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Phone Lookup | Reverse Cellphone Call | Area Code lookup | Check Caller Number">
+      <meta name="author" content="checkcallernumber.com">
+      <title>{% block title %}Home Page{% endblock %}</title>
+      <link href="{{app_url}}/http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+      <link href="{{app_url}}/dist/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+      <link href="{{app_url}}/dist/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+      <link href="{{app_url}}/dist/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
-        {% block stylesheets %}
-            <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+      <link href="{{app_url}}/dist/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
+      <link href="{{app_url}}/dist/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
+      <link href="{{app_url}}/dist/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css" />
+      <link href="{{app_url}}/dist/layouts/layout4/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
+      <link href="{{app_url}}/dist/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css" />
+      <link href="{{app_url}}/dist/pages/css/search.min.css" rel="stylesheet" type="text/css" />
 
-            <!--[if lte IE 8]>
-                <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
-            <![endif]-->
-            <!--[if gt IE 8]><!-->
-                <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
-            <!--<![endif]-->
- 
-        {% endblock %}
-    </head>
 
-    <body>
 
-        <div class="content">
-       
-        {% block body %}ccc{% endblock %}
+      <link href="{{app_url}}/dist/global/plugins/jquery-jvectormap-2.0.3/jquery-jvectormap-2.0.3.css" rel="stylesheet" type="text/css" />
+      <link href="{{app_url}}/dist/global/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
 
-        {% block javascripts %}
+      <link href="{{app_url}}/dist/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+      <link href="{{app_url}}/dist/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" type="text/css" />
 
-        {% endblock %}
-    
-    </body>
+      <link href="{{app_url}}/dist/css/custom.css" rel="stylesheet" type="text/css" />
+      <link rel="shortcut icon" href="favicon.ico" /> 
+      <link href="{{app_url}}/dist/css/admin.css" rel="stylesheet">
+
+      <link href="{{app_url}}/dist/global/plugins/ladda/ladda-themeless.min.css" rel="stylesheet" type="text/css" />
+
+
+   </head>
+   <body data-gr-c-s-loaded="true">
+      <div id="wrapper">
+         <!-- Navigation -->
+         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="container">
+               <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".mobile-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="{{app_url}}">Check Caller Number</a>
+               </div>
+               <!-- /.navbar-header -->
+               <div class="search-bar" style="padding-right:60px !important;">
+                  <form name="form" method="post" action="{{app_url}}">
+                     <div class="input-group custom-search-form search-bar">
+                        <input name="number" type="text" class="form-control" placeholder="Search..." required="">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default">
+                        <i class="fa fa-search"></i>
+                        </button>
+                        </span>
+                     </div>
+                  </form>
+               </div>
+               <ul class="nav navbar-top-links navbar-right">
+                  <li class="dropdown">
+                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                     Numbers <i class="fa fa-caret-down"></i>
+                     </a>
+                     <ul class="dropdown-menu dropdown-user">
+                        <li><a href="/recentsuspicious"> Recent Suspicious </a>
+                        </li>
+                        <li><a href="/recentsearch"> Recently Search </a>
+                        </li>
+                        <li><a href="/recentreport"> Recently Report </a>
+                        </li>
+                        <li><a href="/scams"> Scams </a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="dropdown">
+                     <a href="{{app_url}}/comments/1">
+                     Comments
+                     </a>
+                  </li>
+                  <li class="dropdown">
+                     <a href="/newslist">
+                     News&amp;Articles
+                     </a>
+                  </li>
+                  <li class="dropdown">
+                     <a href="/areacode">
+                     Area Codes
+                     </a>
+                  </li>
+                  <li class="dropdown">
+                     <a href="/contact">
+                     Contact us
+                     </a>
+                  </li>
+                  <!-- /.dropdown -->
+               </ul>
+               <!-- /.navbar-top-links -->
+            </div>
+            <!--container-->
+         </nav>
+         <div id="main-content">
+            <div class="container">
+               <div class="row">
+                  <div class="row">
+                     <div class="col-lg-8">
+                        <div class="row flash-messages">
+                            <div class="col-sm-12">
+                                {% include ('flash_messages.html.twig') %}
+                            </div>
+                        </div>
+
+                        <br>
+                        {% block body %}{% endblock %}
+                     </div>
+                     <!-- /.col-lg-9 -->
+                     <div class="col-lg-4" style="max-width:330px !important;">
+                        <br>
+                        <div class="panel panel-info">
+                           <div class="panel-heading">
+                              <strong>Recent News &amp; Articles</strong>
+                           </div>
+                           <!-- /.panel-heading -->
+                           <div class="panel-body">
+                              <div><a href="/article/33" title="Read more details"><i class="fa fa-file-o"></i> Vodafone UK warns against international 'Wangiri' phone fraud </a></div>
+                              <div><a href="/article/32" title="Read more details"><i class="fa fa-file-o"></i> Scam</a></div>
+                              <div><a href="/article/31" title="Read more details"><i class="fa fa-file-o"></i> Social Security scams in high gear</a></div>
+                           </div>
+                           <!-- /.panel-body -->
+                           <div class="panel-footer">
+                              <a href="/newslist">Read more and post my own Article</a>
+                           </div>
+                        </div>
+                        <h3>Recent Comments</h3>
+                        {% for comment in recent_comments %}
+                        
+                           {% include 'comment_block.html.twig' with {'comment': comment} %}                    
+
+                        {% endfor %}
+                        <div class="well well-sm well-default text-center"><a href="/comments">Read more comments</a></div>
+                     </div>
+                     <!-- /.col-lg-3 -->
+                  </div>
+                  <!-- /.row -->
+               </div>
+               <!--row-->
+            </div>
+            <!-- /#container -->
+         </div>
+         <!-- /#main-content -->
+         <div>
+            <center>2018 <a href="/">checkcallernumber.com</a> © All Rights Reserved<a href="/aboutus">About Us</a><a href="/faq">FAQ</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of service</a></center>
+         </div>
+         <br>    
+      </div>
+      <!-- /#wrapper -->
+      <script src="dist/global/plugins/jquery.min.js"></script>
+      <script src="dist/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+      <span id="top-link-block" class="affix">
+      <a href="#top" class="well well-sm" onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
+      <i class="glyphicon glyphicon-chevron-up"></i> Back to Top
+      </a>
+      </span><!-- /top-link-block -->
+      <script>
+         if ( ($(window).height() + 100) < $(document).height() ) {
+             $('#top-link-block').removeClass('hidden').affix({
+                 offset: {top:100}
+             });
+         }
+      </script>
+
+      <style type="text/css">
+         .flash-messages{
+            margin-top: 5px;
+         }
+         .close{
+            text-indent: 0;
+         }
+      </style>
+   </body>
 </html>

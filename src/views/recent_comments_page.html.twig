@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Phone Checker{% endblock %}
+
+{% block body %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Add comment
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div>
+                If you received an odd call, undesirable SMS message, or simply came across a number you do not understand and want to have more info about, most probably you're not the only person. Enter this particular telephone number and provide your comment.
+            </div>
+
+            <div>
+                <form name="searchForm" id="searchForm" method="get" action="./search.php">
+                    <div class="input-group">
+                        <input id="btn-input" name="number" type="text" class="form-control input-lg" placeholder="Enter phone number" required="">
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger btn-lg" id="btn-chat">
+                                Search
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+
+<h3>Recent Comments</h3>
+    <!--div class="well well-default"-->
+        <div class="row">
+            
+            <div class="col-md-5 text-center" style="visibility: hidden;">
+            <form id="comform" name="comform" method="post" action="./comments">
+                <div class="input-group ">
+                    <input id="sort" name="sort" type="hidden" value="date">
+                    <input id="calltype" name="calltype" type="hidden" value="">
+                    <input id="search" name="search" type="text" class="form-control" placeholder="Search comment" required="" value="">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+                </div>                    
+            </form> 
+            </div>
+
+            <div class="col-md-7 text-center" style="padding-top:10px;">
+<!--                 <select id="calltype_select" name="calltype_select" size="1" onchange="getType()" style="padding:1px;margin:5px;">
+                    <option value="" selected="">Call Type</option>
+                    <option value="unknown">Unknown</option>
+                    <option value="scam">Scam</option>
+                    <option value="telemarketer">Telemarketer</option>
+                    <option value="harassment">Harassment</option>
+                    <option value="survey">Survey</option>
+                    <option value="political">Political</option>
+                    <option value="spam">Spam</option>
+                    <option value="debt">Debt Collector</option>
+                    <option value="prank">Prank call</option>
+                    <option value="positive">Positive</option>
+                </select> -->
+            </div>
+        </div>
+    <br>
+    <!--/div-->
+    
+    <div id="comments-content">
+        {% for comment in comments %}
+        
+           {% include 'comment_block.html.twig' with {'comment': comment} %}                    
+
+        {% endfor %}
+    </div>
+    
+<div class="row">
+    <div class="col-md-6">
+        {{pagination}}
+    <!-- <ul id="pagination-comment" class="pagination-sm pagination"><li class="page-item first disabled"><a href="#" class="page-link">First</a></li><li class="page-item prev disabled"><a href="#" class="page-link">Prev</a></li><li class="page-item active"><a href="#" class="page-link">1</a></li><li class="page-item"><a href="#" class="page-link">2</a></li><li class="page-item"><a href="#" class="page-link">3</a></li><li class="page-item"><a href="#" class="page-link">4</a></li><li class="page-item"><a href="#" class="page-link">5</a></li><li class="page-item next"><a href="#" class="page-link">Next</a></li><li class="page-item last"><a href="#" class="page-link">Last</a></li></ul> -->
+    </div>
+    <!-- div class="col-md-6 text-right">
+        <p id="showitems" style="margin:26px;">Showing 1 - 25 of total 41159 entries.</p>
+    </div> -->
+</div>
+{% endblock %}
