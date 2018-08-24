@@ -68,9 +68,11 @@ Router::route('([0-9]{3})-([0-9]{3})', function($area_code, $prefix) use($contro
 
 
 Router::route('add_comment', function() use($controller){
-	var_dump($_POST);
-	//die();
 	$controller->addComment($_POST);
+});
+
+Router::route('areacode', function() use($controller){
+	$controller->showAreacodes();
 });
 
 Router::route('comments/([0-9]*)', function($page) use($controller){

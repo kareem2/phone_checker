@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Area Codes{% endblock %}
+
+{% block body %}
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+	    Area Code List (United States & Canada)                           
+	</div>
+	<!-- /.panel-heading -->
+
+	<!-- /.panel-heading -->
+	<div class="panel-body">
+		<div class="row">
+	    	<div class="col-md-6">
+	        	<h3>Area Code Listings by State</h3>
+	        	<table class="table table-responsive">
+	            	<thead>
+	                	<tr>
+	                    	<th>State</th>
+	                    	<th>Area Code</th>
+	                    	<th>Location & Time Zone</th>
+	                	</tr>
+	            	</thead>
+	            	<tbody>
+			        {% for state in states|keys %}
+			        	{% for area_code in states[state]|keys %}
+							<tr>
+								{% if area_code == 0 %}
+								<td><!-- <a href="/state/{{state}}"> -->{{state}}<!-- </a> --></td>
+								{% else %}
+								<td style="border:none !important;"></td>
+								{% endif %}
+								<td><a href="/205">{{states[state][area_code].code}}</a></td>
+								<td>{{states[state][area_code].major_city}}<br>
+									<div style="padding-top:5px;margin-top:5px;border-top:1px solid #ccc;">{{states[state][area_code].time_zone}}</div></td>
+							</tr>
+						{% endfor %}			        	
+			        {% endfor %}
+	            	</tbody>
+	        	</table>
+	    	</div>
+
+	    	<div class="col-md-6">
+	        	<h3>Area Code Listings by Area Code</h3>
+	        	<table class="table table-responsive">
+	            	<thead>
+	                	<tr>
+	                    	<th>Area Code</th>
+	                    	<th>State</th>
+	                    	<th>Location & Time Zone</th>
+	                	</tr>
+	            	</thead>
+	            	<tbody>
+			        {% for area_code in areacodes %}
+						<tr>
+							<td><a href="/205">{{area_code.code}}</a></td>
+							<td><!-- <a href="/state/{{state}}"> -->{{area_code.state_name}}<!-- </a> --></td>
+							<td>{{area_code.major_city}}<br>
+								<div style="padding-top:5px;margin-top:5px;border-top:1px solid #ccc;">{{area_code.time_zone}}</div></td>
+						</tr>
+			        {% endfor %}
+	            	</tbody>
+	        	</table>
+	    	</div>	    	
+		</div>
+	</div>
+</div>
+
+{% endblock %}

@@ -28,3 +28,8 @@ INSERT INTO `call_type` (`id`, `name`) VALUES
 (9, 'Prank Call'),
 (10, 'Positive');
 COMMIT;
+
+create or replace view areacodes AS
+SELECT area.state_id, state.name state_name, state.time_zone, area.code, area.major_city
+from area, state
+where area.state_id = state.id;

@@ -121,6 +121,20 @@ class Controller
 		die();
 	}
 
+
+	public function showAreacodes(){
+		$codes = $this->db->select('areacodes', []);
+		$states = [];
+		foreach ($codes as $code) {
+			$state[$code['state_name']][] = ['code' => $code['code'], 'time_zone' => $code['time_zone'], 'major_city' => $code['major_city']];
+		}
+		ksort($state);
+		$this->twig->display('areacodes.html.twig', array('states' => $state, 'areacodes' => $codes));
+		
+		var_dump($state);
+		var_dump($codes);
+		die();
+	}
 }
 
 
