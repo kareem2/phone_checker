@@ -16,4 +16,4 @@
 		"files": ["src/config.php"],
         "classmap": ["src/helper.php", "src/model.php", "src/controller.php", "vendor/rawInclude/dice.php", "vendor/rawInclude/router.php"]
     }
-}
+} 
