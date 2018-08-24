@@ -33,3 +33,5 @@ create or replace view areacodes AS
 SELECT area.state_id, state.name state_name, state.time_zone, area.code, area.major_city
 from area, state
 where area.state_id = state.id;
+
+ALTER TABLE `comment` ADD `prefix_id` INT NOT NULL AFTER `created_at`;

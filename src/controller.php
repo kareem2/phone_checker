@@ -93,7 +93,8 @@ class Controller
 	}	
 
 	public function addComment($data){
-
+		var_dump($data);
+		die();
 		$result = $this->db->insert('comment', $data);
 
 		$this->app->flashMessage('success', 'Thank you for your feedback');
