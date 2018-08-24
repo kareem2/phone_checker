@@ -131,8 +131,6 @@ class Controller
 		ksort($state);
 		$this->twig->display('areacodes.html.twig', array('states' => $state, 'areacodes' => $codes));
 		
-		var_dump($state);
-		var_dump($codes);
 		die();
 	}
 }
