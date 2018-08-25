@@ -96,8 +96,6 @@ class Controller
 	}	
 
 	public function addComment($data){
-		var_dump($data);
-
 		$client = new Client(['verify' => false]);
 
 		
@@ -125,7 +123,7 @@ class Controller
 		$this->app->flashMessage('success', 'Thank you for your feedback');
 
 		header("location: ". APP_URL."/{$data['phone_number']}");
-
+		die();
 		//var_dump($result);
 
 	}
