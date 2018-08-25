@@ -115,7 +115,7 @@ class Controller
 			$this->app->flashMessage('error', 'The reCAPTCHA is wrong');
 
 			header("location: ". APP_URL."/{$data['phone_number']}");	
-			die();		
+			die(); 		
 		}
 
 		unset($data['g-recaptcha-response']);
