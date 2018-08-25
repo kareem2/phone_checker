@@ -5,6 +5,9 @@ namespace App\Controller;
 use \App\Model\Model;
 use \App\Helper\Helper;
 use MirazMac\Pagination\Pagination;
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
+use Google\Auth\HttpHandler\Guzzle6HttpHandler;
 
 class Controller
 {	
@@ -94,16 +97,38 @@ class Controller
 
 	public function addComment($data){
 		var_dump($data);
-		die();
+
+		$client = new Client(['verify' => false]);
+
+		
+		$response = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify', [
+		    'form_params' => [
+		        'secret' => '6LcCH2wUAAAAABOCYFtuiMynISSGC1cE3jIE1oYH',
+		        'response' => $data['g-recaptcha-response']
+		    ]
+		]);
+
+		$response = $response->getBody()->getContents();
+		$response = json_decode($response, true);
+
+		if($response['success'] == false || !isset($response['success'])){
+			$this->app->flashMessage('error', 'The reCAPTCHA is wrong');
+
+			header("location: ". APP_URL."/{$data['phone_number']}");	
+			die();		
+		}
+
+		unset($data['g-recaptcha-response']);
+		
 		$result = $this->db->insert('comment', $data);
 
 		$this->app->flashMessage('success', 'Thank you for your feedback');
 
 		header("location: ". APP_URL."/{$data['phone_number']}");
+
 		//var_dump($result);
 
 	}
-
 
 	public function recentComments($limit = 5, $page = 1){
 		$start = ($page - 1) * $limit;
