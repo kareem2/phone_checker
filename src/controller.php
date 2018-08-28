@@ -133,7 +133,7 @@ class Controller
 		$comments = $this->db->query("select * from comments order by id desc limit $start, $limit", []);
 		$total = $this->db->query("select count(*) total from comments", [])[0]['total'];
 		//var_dump($comments);
-		$pagination = new Pagination($total, $page);
+		$pagination = new Pagination($total, $page, $limit);
 		$pagination->setLineFormat('<li class="@class@"><a href="'.APP_URL.'/comments/@id@">@label@</a></li>');
 		$pages = $pagination->parse();
 		//var_dump($pages);
@@ -179,7 +179,7 @@ class Controller
 
 		$total = $this->db->query("select count(*) total from prefix where area_code = $area_code", [])[0]['total'];
 
-		$pagination = new Pagination($total, $page);
+		$pagination = new Pagination($total, $page, $limit);
 
 		$pagination->setLineFormat('<li class="@class@"><a href="'.APP_URL.'/area_code/'.$area_code.'/@id@">@label@</a></li>');
 
