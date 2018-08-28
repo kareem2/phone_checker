@@ -201,7 +201,7 @@ class Model
 		
 		$stmt->execute();
 		
-		if($options['single'] == true){
+		if(isset($options['single']) && $options['single'] == true){
 			$result = $stmt->fetch();
 			if(!empty($result)){
 				return $result;

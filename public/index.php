@@ -23,6 +23,7 @@ $helper 	= $dice->create('\App\Helper\Helper');
 * Router
 */
 
+//$controller->majorCities();
 Router::route('/phone_checker/public/', function() use($controller){
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$phone_number = $_POST['number'];
@@ -80,7 +81,16 @@ Router::route('comments/([0-9]*)', function($page) use($controller){
 	$controller->recentComments(10, $page);
 });
 
-//var_dump($url);
+Router::route('state/([^/]+)', function($state_name) use($controller){
+	$controller->showStateCodes($state_name);
+});
+
+Router::route('area_code/([0-9]+)', function($area_code) use($controller){
+	$controller->showAreaCodePrefixes($area_code);
+});
+Router::route('area_code/([0-9]+)/([0-9]+)', function($area_code, $page) use($controller){
+	$controller->showAreaCodePrefixes($area_code, $page);
+});
 
 if (false === Router::execute($url)) {
 	var_dump($url);

@@ -157,6 +157,63 @@ class Controller
 		
 		die();
 	}
+
+
+	public function showStateCodes($state_name)
+	{
+		$state = $this->db->selectSingle('states_vw', ['conditions' => ['state_name' => $state_name]]);
+		$areas = $this->db->select2('area', ['conditions' => ['state_id' => $state['state_id']]]);
+		$this->twig->display('state_page.html.twig', array('state' => $state, 'areas' => $areas));
+
+		die();
+	}
+
+
+	public function showAreaCodePrefixes($area_code, $page = 1){
+		$limit = 50;
+		$area = $this->db->selectSingle('areacodes', ['conditions' => ['code' => $area_code]]);
+		//var_dump($area);
+
+		$start = ($page - 1) * $limit;
+		$prefixes = $this->db->query("select * from prefix where area_code = $area_code order by code limit $start, $limit", []);
+
+		$total = $this->db->query("select count(*) total from prefix where area_code = $area_code", [])[0]['total'];
+
+		$pagination = new Pagination($total, $page);
+
+		$pagination->setLineFormat('<li class="@class@"><a href="'.APP_URL.'/area_code/'.$area_code.'/@id@">@label@</a></li>');
+
+		$pages = $pagination->parse();
+
+		$pages = $pagination->renderHtml($before = '<ul class="pagination-sm pagination">');
+
+		$this->twig->display('prefixes_page.html.twig', array('area' => $area, 'prefixes' => $prefixes, 'pagination' => $pages));
+
+		//var_dump($prefixes);		
+		die();
+
+
+		
+		//var_dump($comments);
+		
+		
+		
+		//var_dump($pages);
+		//die();
+		
+		
+
+		
+		die();
+
+	}
+
+	public function majorCities()
+	{
+		$areas = $this->db->query('select code from area', []);
+		var_dump($areas);
+		die();
+	}
 }
 
 

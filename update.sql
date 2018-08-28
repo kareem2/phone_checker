@@ -30,8 +30,9 @@ INSERT INTO `call_type` (`id`, `name`) VALUES
 COMMIT;
 
 create or replace view areacodes AS
-SELECT area.state_id, state.name state_name, state.time_zone, area.code, area.major_city
-from area, state
-where area.state_id = state.id;
+SELECT area.state_id, state.name state_name, state.time_zone, area.code, area.major_city, country.name country_name
+from area, state, country
+where area.state_id = state.id
+and country.id = state.country_id;
 
 ALTER TABLE `comment` ADD `prefix_id` INT NOT NULL AFTER `created_at`;
