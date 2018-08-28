@@ -36,3 +36,9 @@ where area.state_id = state.id
 and country.id = state.country_id;
 
 ALTER TABLE `comment` ADD `prefix_id` INT NOT NULL AFTER `created_at`;
+
+create or replace view states_vw as
+select `state`.`id` AS `state_id`,`state`.`name` AS `state_name`,`state`.`time_zone` AS `time_zone`,
+`country`.`id` AS `country_id`,`country`.`name` AS `country_name` 
+from (`state` join `country`) 
+where (`state`.`country_id` = `country`.`id`);	
