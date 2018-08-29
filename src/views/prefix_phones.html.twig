@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Phone number starting with {{prefix.area_code}}-{{prefix.code}}-{{number_prefix}}{% endblock %}
+
+{% block body %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a href="{{app_url}}">Home</a> / <a href="{{app_url}}/area_code/{{prefix.area_code}}">{{prefix.area_code}}</a> / <a href="{{app_url}}/{{prefix.area_code}}-{{prefix.code}}">{{prefix.area_code}}-{{prefix.code}}</a> / {{prefix.area_code}}-{{prefix.code}}-{{number_prefix}}</div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">        
+        <div class="common-desc">
+             This is the phone number range for prefix {{prefix.area_code}}-{{prefix.code}}-{{number_prefix}}. If there is any highlighted number, that means this number has been reported by users.                                
+        </div>
+        
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Phone Numbers Starting with {{prefix.area_code}}-{{prefix.code}}-{{number_prefix}}XX
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <table class="table table-striped table-responsive">                          
+            <tbody>
+            {% for i in 0..24 %}
+                <tr>
+                    {% for x in 0..3%}
+                        <td><a href="{{app_url}}/{{prefix.area_code}}-{{prefix.code}}-{{number_prefix}}{{'%02d'|format(i*4 + x)}}">{{prefix.area_code}}-{{prefix.code}}-{{number_prefix}}{{'%02d'|format(i*4 + x)}}</a></td>
+                    {% endfor %}
+                </tr>  
+            {% endfor %}                
+                           
+            </tbody>
+        </table>                          
+    </div>
+</div>
+{% endblock %}  

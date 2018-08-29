@@ -94,15 +94,18 @@ class Model
 		return $this->select2($table, $options);
 	}
 
-	public function query($sql_query, $parameters){
+	public function query($sql_query, $parameters, $print = false){
 
 		$where_clause = '';
-		if(!empty($options['conditions']))
+		if(!empty($parameters))
 			$where_clause = $this->buildWhere($parameters);
 
 
 		$sql_query = $sql_query . " $where_clause";
 		//var_dump($sql_query);
+		if($print){
+			var_dump($sql_query);
+		}
 		$stmt = self::$db->prepare($sql_query);
 
 		foreach ($parameters as $key => &$value) {

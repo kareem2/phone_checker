@@ -71,8 +71,6 @@ class Controller
 
 			$overall_reports = $this->db->query("select count(*) reports from comments", ['phone_number' => $number, ':raw' => 'rate < 0'])[0]['reports'];
 
-			//var_dump($overall_reports);
-
 			$details = $this->db->selectSingle('phone_details', 
 				['conditions' => ['area_code' => $area_code, 
 				'code' => $prefix]]
@@ -172,7 +170,6 @@ class Controller
 	public function showAreaCodePrefixes($area_code, $page = 1){
 		$limit = 50;
 		$area = $this->db->selectSingle('areacodes', ['conditions' => ['code' => $area_code]]);
-		//var_dump($area);
 
 		$start = ($page - 1) * $limit;
 		$prefixes = $this->db->query("select * from prefix where area_code = $area_code order by code limit $start, $limit", []);
@@ -188,24 +185,20 @@ class Controller
 		$pages = $pagination->renderHtml($before = '<ul class="pagination-sm pagination">');
 
 		$this->twig->display('prefixes_page.html.twig', array('area' => $area, 'prefixes' => $prefixes, 'pagination' => $pages));
+	}
 
-		//var_dump($prefixes);		
+	public function preview_prefix($area_code, $area_prefix, $number_prefix = null){
+		$prefix = $this->db->selectSingle('prefixes', ['conditions' => ['area_code' => $area_code, 'code' => $area_prefix]]);
+		//var_dump($prefix);
+		$this->twig->display('prefix_preview.html.twig', ['prefix' => $prefix]);
 		die();
+	}
 
-
-		
-		//var_dump($comments);
-		
-		
-		
-		//var_dump($pages);
-		//die();
-		
-		
-
-		
+	public function preview_prefix_phones($area_code, $area_prefix, $number_prefix){
+		$prefix = $this->db->selectSingle('prefixes', ['conditions' => ['area_code' => $area_code, 'code' => $area_prefix]]);
+		//var_dump($prefix);
+		$this->twig->display('prefix_phones.html.twig', ['prefix' => $prefix, 'number_prefix' => $number_prefix]);
 		die();
-
 	}
 
 	public function majorCities()

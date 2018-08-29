@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Area Code {{prefix.area_code}} Prefix {{prefix.area_code}}-{{prefix.code}} ( {{prefix.area_code}}{{prefix.code}} ){% endblock %}
+
+{% block body %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a href="{{app_url}}">Home</a> / <a href="{{app_url}}/area_code/{{prefix.area_code}}">{{prefix.area_code}}</a> / {{prefix.area_code}}-{{prefix.code}}</div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <table id="area_code" class="table table-striped table-responsive">
+            <tbody>
+                <tr>
+                    <td class="text-bold">County:</td><td>{{prefix.county}}</td>
+                </tr>
+                <tr>
+                    <td class="text-bold">Primary City:</td><td>{{prefix.city}}</td>
+                </tr>
+                <tr>
+                    <td class="text-bold">Usage:</td><td>{{prefix.p_usage}}</td>
+                </tr>
+                <tr>
+                    <td class="text-bold">Company:</td><td>{{prefix.company}}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="common-desc">
+             {{prefix.area_code}}-{{prefix.code}} is a phone number prefix operated by {{prefix.company}}, and is located in the city of
+             {{prefix.city}}.
+             Please check general information and phone number ranges of this prefix.                                 
+        </div>
+        
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Phone Number Ranges with Prefix {{prefix.area_code}}-{{prefix.code}}</div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <table class="table table-striped table-responsive">                          
+            <tbody>
+            {% for i in 0..24 %}
+                <tr>
+                    {% for x in 0..3%}
+                        <td><a href="{{app_url}}/{{prefix.area_code}}-{{prefix.code}}-{{'%02d'|format(i*4 + x)}}">{{prefix.area_code}}-{{prefix.code}}-{{'%02d'|format(i*4 + x)}}</a></td>
+                    {% endfor %}
+                </tr>  
+            {% endfor %}                
+                           
+            </tbody>
+        </table>                          
+    </div>
+</div>
+{% endblock %}  

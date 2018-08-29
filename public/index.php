@@ -54,17 +54,13 @@ Router::route('([0-9]{10})', function($full_number) use($controller){
 	$controller->getPhoneDetails($full_number);
 });
 
-Router::route('([0-9]{3})-([0-9]{3})-([0-9]{2})', function($area_code, $prefix, $number) use($controller){
-	var_dump([$area_code, $prefix, $number]);
-	die();
-	$controller -> itemPage($id, $article_name);
+Router::route('([0-9]{3})-([0-9]{3})-([0-9]{2})', function($area_code, $area_prefix, $number_prefix) use($controller){
+	$controller->preview_prefix_phones($area_code, $area_prefix, $number_prefix);
 });
 
 
-Router::route('([0-9]{3})-([0-9]{3})', function($area_code, $prefix) use($controller){
-	var_dump([$area_code, $prefix]);
-	die();
-	$controller -> itemPage($id, $article_name);
+Router::route('([0-9]{3})-([0-9]{3})', function($area_code, $area_prefix) use($controller){
+	$controller->preview_prefix($area_code, $area_prefix);
 });
 
 
