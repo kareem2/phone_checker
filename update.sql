@@ -42,3 +42,12 @@ select `state`.`id` AS `state_id`,`state`.`name` AS `state_name`,`state`.`time_z
 `country`.`id` AS `country_id`,`country`.`name` AS `country_name` 
 from (`state` join `country`) 
 where (`state`.`country_id` = `country`.`id`);	
+
+CREATE or replace VIEW `prefixes`  AS  
+select `prefix`.`id` AS `id`,`prefix`.`code` AS `code`,`prefix`.`county` AS `county`,`prefix`.`city` AS `city`,
+`prefix`.`usage_id` AS `usage_id`,`prefix`.`company_id` AS `company_id`,`prefix`.`area_code` AS `area_code`,`prefix`.`p_usage` AS `p_usage`,
+`prefix`.`company` AS `company`,`prefix`.`state_id` AS `state_id`,`state`.`time_zone` AS `time_zone`,`state`.`name` AS `state_name`,
+`area`.`major_city` AS `major_city`,`country`.`name` AS `country_name` 
+from (((`prefix` join `state`) join `area`) join `country`) 
+where ((`prefix`.`state_id` = `state`.`id`) and (`prefix`.`area_code` = `area`.`code`) and (`state`.`country_id` = `country`.`id`)) ;
+
