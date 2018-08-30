@@ -5,6 +5,10 @@ namespace App\Helper;
 use \Twig_Loader_Filesystem;
 use \Twig_Environment;
 use \Plasticbrain\FlashMessages\FlashMessages;
+use Symfony\Component\Cache\Adapter\PdoAdapter;
+use Symfony\Component\Cache\Simple\PdoCache;
+use \App\Model\Model;
+
 
 /**
  * 
@@ -131,4 +135,45 @@ class Helper
 		ob_end_clean();
 		return $messgs;
 	}
+
+	public function updateCaheItem($name, $value, $key = null){
+		//$pdo = new PdoAdapter(Model::getPdoConnection());
+		$pdo = Model::getPdoConnection();
+		$cache = new PdoCache($pdo);
+		$limit = 50;
+
+		if (!$cache->has($name)) {
+		    $cache->set($name, array($value));
+		}else{
+			$content = $cache->get($name);
+			$content[] = $value;
+
+			$size = count($content);
+
+			foreach ($content as $key => $value) {
+				if($size > $limit){
+					unset($content[$key]);
+					$size--;
+				}else{
+					break;
+				}
+			}
+
+			$content = array_map("unserialize", array_unique(array_map("serialize", $content)));
+
+			$cache->set($name, array_values($content));
+
+		}
+	}
+
+	public function getCaheItem($name){
+		//$pdo = new PdoAdapter(Model::getPdoConnection());
+		$pdo = Model::getPdoConnection();
+		$cache = new PdoCache($pdo);
+
+		$content = $cache->get($name);
+
+		return $content;
+
+	}	
 }

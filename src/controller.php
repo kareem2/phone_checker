@@ -46,6 +46,13 @@ class Controller
 		return;
 	}
 
+	public function test(){
+		$this->app->updateCaheItem('test', 5);
+		$c = $this->app->getCaheItem('test');
+		var_dump($c);
+		die();
+	}
+
  	public function itemPage($id, $article_name)
 	{	
 
@@ -76,6 +83,8 @@ class Controller
 				'code' => $prefix]]
 			);
 
+			$details['suffix'] = $phone;
+
 			if(!isset($details) || empty($details)){
 				$this->app->flashMessage('error', 'The number you search for is not found');
 
@@ -83,7 +92,9 @@ class Controller
 				die();
 			}
 			$comments = $this->db->select('comments', ['phone_number' => $number], " order by created_at DESC");
-			//var_dump($this->app->getFlashMessages());
+
+			$this->app->updateCaheItem('recent_search', $details);
+
 			$this->twig->display('phone_details.html.twig', array('details' => $details, 'suffix' => $phone, 'comments' => $comments, 'overall_rating' => $overall_rating, 'overall_reports' => $overall_reports));
 
 			die();
@@ -206,6 +217,11 @@ class Controller
 		$areas = $this->db->query('select code from area', []);
 		var_dump($areas);
 		die();
+	}
+
+	public function showRecentSearch(){
+		$recent_numbers = $this->app->getCaheItem('recent_search');
+		$this->twig->display('recent_search.html.twig', ['numbers' => $recent_numbers]);
 	}
 }
 

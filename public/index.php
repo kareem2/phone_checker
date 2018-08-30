@@ -7,9 +7,14 @@ require_once __DIR__.'/../vendor/autoload.php';
 use \Dice\Dice;
 use \Router;
 use Symfony\Component\Cache\Adapter\PdoAdapter;
+use Symfony\Component\Cache\Simple\PdoCache;
 use \App\Model\Model;
 
-$cache = new PdoAdapter(Model::getPdoConnection());
+//$pdo = new PdoAdapter(Model::getPdoConnection());
+// $pdo = Model::getPdoConnection();
+// $cache = new PdoCache($pdo);
+// $cache->set('products_count', [1,2,3,4]);
+// $cache->set('products_count2', 9849);
 
 if (!session_id()) @session_start();
 
@@ -23,6 +28,8 @@ $helper 	= $dice->create('\App\Helper\Helper');
 * Router
 */
 
+
+
 //$controller->majorCities();
 Router::route('/phone_checker/public/', function() use($controller){
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -33,6 +40,8 @@ Router::route('/phone_checker/public/', function() use($controller){
 		$controller->homePage();
 	}
 });
+
+
 
 Router::route('/', function() use($controller){
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -84,9 +93,21 @@ Router::route('state/([^/]+)', function($state_name) use($controller){
 Router::route('area_code/([0-9]+)', function($area_code) use($controller){
 	$controller->showAreaCodePrefixes($area_code);
 });
+
 Router::route('area_code/([0-9]+)/([0-9]+)', function($area_code, $page) use($controller){
 	$controller->showAreaCodePrefixes($area_code, $page);
 });
+
+Router::route('recent_search', function() use($controller){
+	$controller->showRecentSearch();
+});
+
+
+
+Router::route('test', function() use($controller){
+	$controller->test();
+});
+
 
 if (false === Router::execute($url)) {
 	var_dump($url);

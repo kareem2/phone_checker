@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Area Codes{% endblock %}
+
+{% block body %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        More Recently Searched Numbers
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <div class="row">
+            {% for number in numbers %}
+            <div class="col-md-6">
+                <div class="recent-search">
+                    <a href="{{app_url}}/{{number.area_code}}-{{number.code}}-{{number.suffix}}">{{number.area_code}}-{{number.code}}-{{number.suffix}}</a>
+                    {{number.city}}, {{number.state_name}}, {{number.country_name}}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}                        
