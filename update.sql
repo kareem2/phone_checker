@@ -49,5 +49,12 @@ select `prefix`.`id` AS `id`,`prefix`.`code` AS `code`,`prefix`.`county` AS `cou
 `prefix`.`company` AS `company`,`prefix`.`state_id` AS `state_id`,`state`.`time_zone` AS `time_zone`,`state`.`name` AS `state_name`,
 `area`.`major_city` AS `major_city`,`country`.`name` AS `country_name` 
 from (((`prefix` join `state`) join `area`) join `country`) 
-where ((`prefix`.`state_id` = `state`.`id`) and (`prefix`.`area_code` = `area`.`code`) and (`state`.`country_id` = `country`.`id`)) ;
+where ((`prefix`.`state_id` = `state`.`id`) and (`prefix`.`area_code` = `area`.`code`) and (`state`.`country_id` = `country`.`id`));
 
+CREATE TABLE IF NOT EXISTS `cache_items` (
+  `item_id` varbinary(255) NOT NULL,
+  `item_data` mediumblob NOT NULL,
+  `item_lifetime` int(10) UNSIGNED DEFAULT NULL,
+  `item_time` int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
